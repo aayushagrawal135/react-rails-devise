@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_10_104028) do
+ActiveRecord::Schema.define(version: 2020_07_10_114553) do
 
   create_table "secret_codes", force: :cascade do |t|
     t.string "code"
-    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "email"
   end
 
 end
