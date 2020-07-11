@@ -16,14 +16,14 @@ class Dropdown extends React.Component {
     render() {
         let items = [1, 10, 20, 50, 100]
         let item_elements = items.map((item)=> {
-            return (<li key={item}>{item}</li>)
+            return (<button key={item}>{item}</button>)
         })
 
-        let dropdown_element = this.state.open ? <ul>{item_elements}</ul> : <ul></ul>
+        let dropdown_element = this.state.open ? <div>{item_elements}</div> : null
 
         return (
-            <div>
-                <button onClick={() => this.toggleView()}>DropDown</button>
+            <div className="Dropdown">
+                <button onClick={this.toggleView}>DropDown</button>
                 {dropdown_element}
             </div>
         );
