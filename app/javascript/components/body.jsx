@@ -1,10 +1,34 @@
 import React from 'react'
 import AllSecretCodes from "./all_secret_codes";
+import Dropdown from "./dropdown";
 
 class Body extends React.Component {
     constructor(props) {
         super(props);
         this.state = {secret_codes: []}
+
+        this.handleSecretCodeGenerate = this.handleSecretCodeGenerate.bind(this);
+        this.addNewSecretCodes = this.addNewSecretCodes.bind(this);
+    }
+
+    handleSecretCodeGenerate(count) {
+        //console.log(count);
+        let body = JSON.stringify({count: count});
+
+        fetch('/api/v1/secret_codes', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: body
+        }).then((response) => {return response.json()} )
+            .then((data) => {
+                addNewSecretCodes(data);
+            });
+    }
+
+    addNewSecretCodes(data) {
+        this.setState((state) => {
+            return {secret_codes: state.secret_codes.concat(data)}
+        });
     }
 
     componentDidMount() {
@@ -20,9 +44,11 @@ class Body extends React.Component {
     }
 
     render() {
-        console.log(this.state.secret_codes)
         return (
-            <AllSecretCodes secret_codes={this.state.secret_codes} />
+            <div className="Body">
+                <Dropdown handleSecretCodeGenerate={this.handleSecretCodeGenerate}/>
+                <AllSecretCodes secret_codes={this.state.secret_codes} />
+            </div>
         );
     }
 }

@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :secret_codes, only: [:index]
+      get 'secret_codes', to: 'secret_codes#index'
+      post 'secret_codes', to: 'secret_codes#create'
     end
   end
 end
