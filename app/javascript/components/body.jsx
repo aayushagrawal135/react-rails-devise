@@ -12,17 +12,16 @@ class Body extends React.Component {
     }
 
     handleSecretCodeGenerate(count) {
-        //console.log(count);
-        let body = JSON.stringify({count: count});
 
         fetch('/api/v1/secret_codes', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: body
-        }).then((response) => {return response.json()} )
-            .then((data) => {
-                addNewSecretCodes(data);
-            });
+            body: JSON.stringify({count: count})
+        }).then((response) => {
+            return response.json();
+        }).then((data) => {
+            this.addNewSecretCodes(data);
+        });
     }
 
     addNewSecretCodes(data) {
