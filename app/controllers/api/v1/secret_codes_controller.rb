@@ -1,4 +1,6 @@
 class Api::V1::SecretCodesController < ApplicationController
+  #before_action :authenticate_user!
+
   def index
     render json: SecretCode.all
   end
