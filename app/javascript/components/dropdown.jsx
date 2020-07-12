@@ -41,7 +41,7 @@ class Dropdown extends React.Component {
 
         return (
             <div className="dropdown">
-                <button onClick={this.showMenu}>DropDown</button>
+                <button onClick={this.showMenu}>Generate</button>
                 {dropdown_element}
             </div>
         );
