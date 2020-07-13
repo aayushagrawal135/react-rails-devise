@@ -12,10 +12,15 @@ class Body extends React.Component {
     }
 
     handleSecretCodeGenerate(count) {
+        const csrf = document.querySelector("meta[name='csrf-token']")
+            .getAttribute("content");
 
         fetch('/api/v1/secret_codes', {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': csrf
+            },
             body: JSON.stringify({count: count})
         }).then((response) => {
             return response.json();

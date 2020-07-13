@@ -16,6 +16,12 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def user_sign_in_check
+    unless user_signed_in?
+      redirect_to new_user_session_path and return true
+    end
+  end
+
   # Overwriting the sign_out redirect path method
   def after_sign_out_path_for(resource_or_scope)
     new_user_session_path
