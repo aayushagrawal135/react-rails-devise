@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       get 'secret_codes', to: 'secret_codes#index'
       post 'secret_codes', to: 'secret_codes#create'
+      get 'secret_codes/delete', to: 'secret_codes#logout'
+      get 'secret_codes/is_signed_in', to: 'secret_codes#is_signed_in'
     end
   end
 end

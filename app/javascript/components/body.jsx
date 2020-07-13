@@ -1,6 +1,7 @@
 import React from 'react'
 import AllSecretCodes from "./all_secret_codes";
 import Dropdown from "./dropdown";
+import Logout from "./logout";
 
 class Body extends React.Component {
     constructor(props) {
@@ -26,7 +27,7 @@ class Body extends React.Component {
             return response.json();
         }).then((data) => {
             this.addNewSecretCodes(data);
-        });
+        }).catch(data => console.log("add secret code"));
     }
 
     addNewSecretCodes(data) {
@@ -38,8 +39,10 @@ class Body extends React.Component {
     componentDidMount() {
         fetch('/api/v1/secret_codes.json')
             .then((response) => {
-                return response.json()
+                if (response.ok)
+                    return response.json();
             })
+            .catch(response=> console.log("get back here later"))
             .then((data) => {
                 return this.setState((state) => {
                     return {secret_codes: data}
@@ -50,6 +53,7 @@ class Body extends React.Component {
     render() {
         return (
             <div className="Body">
+                <Logout />
                 <Dropdown handleSecretCodeGenerate={this.handleSecretCodeGenerate}/>
                 <AllSecretCodes secret_codes={this.state.secret_codes} />
             </div>

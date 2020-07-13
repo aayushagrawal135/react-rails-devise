@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :null_session
+  protect_from_forgery except: :sign_out
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
@@ -14,11 +14,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  private
-
-  def user_sign_in_check
+  def redirect_if_not_signed_in
     unless user_signed_in?
-      redirect_to new_user_session_path and return true
+      redirect_to new_user_session_path
     end
   end
 
